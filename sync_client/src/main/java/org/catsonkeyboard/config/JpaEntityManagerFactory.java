@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JpaEntityManagerFactory {
-    private final String DB_URL = "jdbc:h2:file:./db";
+    private final String DB_URL = "jdbc:h2:file:./db;NON_KEYWORDS=USER,KEY";
     private final String DB_USER_NAME = "admin";
     private final String DB_PASSWORD = "12345";
     private final Class[] entityClasses;
@@ -48,7 +48,7 @@ public class JpaEntityManagerFactory {
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.put("hibernate.id.new_generator_mappings", false);
         properties.put("hibernate.connection.datasource", getH2DataSource());
-//        properties.put("javax.persistence.schema-generation.database.action","create");
+        //properties.put("javax.persistence.schema-generation.database.action","create");
         return properties;
     }
 
