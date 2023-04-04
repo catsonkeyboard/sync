@@ -47,7 +47,11 @@ public class Main {
 //        sync.Start();
 //        System.out.println("test");
 
-//        QueryWrap<User> queryWrap = new QueryWrap<>();
+        //QueryWrap<User> queryWrap = new QueryWrap<>(User.class);
+//        QueryWrap<User> queryWrap = new QueryWrap<>() { };
 //        var list = queryWrap.find();
+
+        Sync sync = new Sync();
+        sync.subscribeTopic(User.class,"user",() -> "true",(u) -> { return true; },() -> {},true);
     }
 }
