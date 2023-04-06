@@ -2,6 +2,7 @@ package org.catsonkeyboard.config;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.metamodel.Metamodel;
 import jakarta.persistence.spi.PersistenceUnitInfo;
 import org.h2.jdbcx.JdbcDataSource;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
@@ -30,6 +31,10 @@ public class JpaEntityManagerFactory {
         Map<String, Object> configuration = new HashMap<>();
         return new EntityManagerFactoryBuilderImpl(new PersistenceUnitInfoDescriptor(persistenceUnitInfo), configuration)
                 .build();
+    }
+
+    protected Metamodel getMetaModel() {
+        return getEntityManagerFactory().getMetamodel();
     }
 
     protected HibernatePersistenceUnitInfo getPersistenceUnitInfo(String name) {

@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.catsonkeyboard.config.JpaEntityManagerFactory;
 import org.catsonkeyboard.dao.QueryWrap;
+import org.catsonkeyboard.entities.SyncTag;
 import org.catsonkeyboard.entities.User;
 import org.catsonkeyboard.http.HttpClientWrap;
 
@@ -13,6 +14,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+//          EntityManager entityManager = new JpaEntityManagerFactory(
+//          new Class[]{User.class, SyncTag.class}).getEntityManager();
+
 //        EntityManager entityManager = new JpaEntityManagerFactory(
 //                new Class[]{User.class}).getEntityManager();
 //        entityManager.getTransaction().begin();
@@ -53,5 +57,7 @@ public class Main {
 
         Sync sync = new Sync();
         sync.subscribeTopic(User.class,"user",() -> "true",(u) -> { return true; },() -> {},true);
+        //sync.Start();
+        sync.test();
     }
 }

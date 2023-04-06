@@ -7,7 +7,6 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.catsonkeyboard.config.JpaEntityManagerFactory;
-import org.catsonkeyboard.entities.User;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;
@@ -19,14 +18,14 @@ public class QueryWrap<T> {
 
     public QueryWrap(EntityManager entityManager, Class<T> clazz) {
         clazz = clazz;
-        entityManager = entityManager;
+        this.entityManager = entityManager;
 //        entityManager = new JpaEntityManagerFactory(
 //                new Class[]{ clazz }).getEntityManager();
     }
 
     public QueryWrap(EntityManager entityManager) {
         clazz = (Class<T>) ((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        entityManager = entityManager;
+        this.entityManager = entityManager;
         //        entityManager = new JpaEntityManagerFactory(
 //                new Class[]{ clazz }).getEntityManager();
     }
@@ -45,6 +44,33 @@ public class QueryWrap<T> {
         Query query = session.createQuery(cr);
         List<T> results = query.getResultList();
         return results;
+    }
+
+    public List<T> findAll() {
+        Session session = entityManager.unwrap(Session.class);
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<T> cr = cb.createQuery(clazz);
+        Root<T> root = cr.from(clazz);
+        cr.select(root);
+        Query query = session.createQuery(cr);
+        List<T> results = query.getResultList();
+        return results;
+    }
+
+    public T findByKey(String keyName, Object keyValue) {
+        Session session = entityManager.unwrap(Session.class);
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<T> cr = cb.createQuery(clazz);
+        Root<T> root = cr.from(clazz);
+        cr.select(root).where(cb.equal(root.get(keyName), keyValue));
+        Query query = session.createQuery(cr);
+        List<T> result =  query.getResultList();
+        var first = result.stream().findFirst();
+        if(first.isEmpty()) {
+            return null;
+        } else {
+            return first.get();
+        }
     }
 
 //    public int update() {
