@@ -39,6 +39,11 @@
             <artifactId>cayenne-project</artifactId>
             <version>4.2.RC2</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.tennaito</groupId>
+            <artifactId>rsql-jpa</artifactId>
+            <version>2.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>
