@@ -13,7 +13,7 @@ import org.catsonkeyboard.http.HttpClientWrap;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //          EntityManager entityManager = new JpaEntityManagerFactory(
 //          new Class[]{User.class, SyncTag.class}).getEntityManager();
 
@@ -55,9 +55,13 @@ public class Main {
 //        QueryWrap<User> queryWrap = new QueryWrap<>() { };
 //        var list = queryWrap.find();
 
+//        EntityManager entityManager = new JpaEntityManagerFactory(
+//                new Class[]{User.class, SyncTag.class}).getEntityManager();
+//        QueryWrap<User> queryWrap = new QueryWrap<>(entityManager, User.class);
+
         Sync sync = new Sync();
         sync.subscribeTopic(User.class,"user",() -> "true",(u) -> { return true; },() -> {},true);
-        //sync.Start();
-        sync.test();
+        sync.Start();
+        //sync.test();
     }
 }

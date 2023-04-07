@@ -5,8 +5,9 @@ import java.util.function.Supplier;
 
 public class Subscriber<T> {
 
-    public Subscriber(String topic, Supplier<String> serverFilter, Function<T, Boolean> clientFilter, Runnable action, Boolean syncToServer) {
+    public Subscriber(String topic, Class<T> clazz, Supplier<String> serverFilter, Function<T, Boolean> clientFilter, Runnable action, Boolean syncToServer) {
         this.topic = topic;
+        this.clazz = clazz;
         this.serverFilter = serverFilter;
         this.clientFilter = clientFilter;
         this.action = action;
@@ -14,6 +15,8 @@ public class Subscriber<T> {
     }
 
     private String topic;
+
+    private Class<T> clazz;
 
     private Supplier<String> serverFilter;
 
@@ -29,6 +32,14 @@ public class Subscriber<T> {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public Class<T> getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class<T> clazz) {
+        this.clazz = clazz;
     }
 
     public Supplier<String> getServerFilter() {

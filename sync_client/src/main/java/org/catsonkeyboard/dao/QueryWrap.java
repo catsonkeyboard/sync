@@ -17,7 +17,7 @@ public class QueryWrap<T> {
     private EntityManager entityManager;
 
     public QueryWrap(EntityManager entityManager, Class<T> clazz) {
-        clazz = clazz;
+        this.clazz = clazz;
         this.entityManager = entityManager;
 //        entityManager = new JpaEntityManagerFactory(
 //                new Class[]{ clazz }).getEntityManager();
