@@ -19,23 +19,14 @@ public class QueryWrap<T> {
     public QueryWrap(EntityManager entityManager, Class<T> clazz) {
         this.clazz = clazz;
         this.entityManager = entityManager;
-//        entityManager = new JpaEntityManagerFactory(
-//                new Class[]{ clazz }).getEntityManager();
     }
 
     public QueryWrap(EntityManager entityManager) {
-        clazz = (Class<T>) ((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        clazz = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.entityManager = entityManager;
-        //        entityManager = new JpaEntityManagerFactory(
-//                new Class[]{ clazz }).getEntityManager();
     }
 
-//    public T findOne() {
-//
-//    }
-
     public List<T> find(Predicate[] predicates) {
-        //Session session = HibernateUtil.getHibernateSession();
         Session session = entityManager.unwrap(Session.class);
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<T> cr = cb.createQuery(clazz);
