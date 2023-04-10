@@ -21,6 +21,33 @@
             <artifactId>jooby-netty</artifactId>
             <version>2.16.1</version>
         </dependency>
+        <!-- DataSource via HikariCP-->
+        <dependency>
+            <groupId>io.jooby</groupId>
+            <artifactId>jooby-hikari</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+        <!-- Hibernate Module-->
+        <dependency>
+            <groupId>io.jooby</groupId>
+            <artifactId>jooby-hibernate</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jooby</groupId>
+            <artifactId>jooby-gson</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tennaito</groupId>
+            <artifactId>rsql-jpa</artifactId>
+            <version>2.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>
